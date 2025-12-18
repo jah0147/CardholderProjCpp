@@ -39,7 +39,7 @@ std::string DiamondCardholder::toString() const
     ss << Cardholder::toString();
     
     // Append Diamond-specific details
-    ss << "(includes " << (discountRate * 100) << "% discount)\n";
+    ss << "(includes " << (discountRate * 100) << "% " << "discount)\n";
     
     return ss.str();
 }

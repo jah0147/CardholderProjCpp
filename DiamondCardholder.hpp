@@ -18,7 +18,7 @@ public:
     protected:
     //class variables
     float discountRate = 0.05; // 5% discount on purchases
-    const int pointsPerDollar = 3;  // 3 points per dollar spent
+    int pointsPerDollar = 3;  // 3 points per dollar spent
 };
 
 #endif // DIAMONDCARDHOLDER_HPP
