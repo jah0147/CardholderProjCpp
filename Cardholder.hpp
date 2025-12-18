@@ -36,7 +36,7 @@ void addPurchases(std::vector<double> pricesIn); //adds puliple purchases to the
 void deletePurchases(std::vector<double> pricesIn); //removes found values from the purches vector list
 
 double interest() const; //Retunres '(prevBalance - payment) * INTEREST_RATE'
-double totalPurchases() const; //Returns the sum of all values in the purchases vector
+virtual double totalPurchases() const; //Returns the sum of all values in the purchases vector
 double balance() const; //returns '(prevBalance + interest + totalPurchases)'
 double currentBalance() const; // returns (prevBalance - payement + interest + totalPurchases)
 double minPayment() const; //returns 3% of the current balance

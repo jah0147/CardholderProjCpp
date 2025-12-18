@@ -219,9 +219,9 @@ std::string Cardholder::toString() const
     ss << std::fixed << std::setprecision(2);
     
     ss << category << "\n";
-    ss << "AcctNo/Name: " << acctNumber << " " << name << "\n";
-    ss << "Previous Balance: $" << prevBalance << "\n";
-    ss << "Payment: ($" << payment << ")\n";
+    ss << "AcctNo/Name: " << getAcctNumber() << " " << getName() << "\n";
+    ss << "Previous Balance: $" << getPrevBalance() << "\n";
+    ss << "Payment: ($" << getPayment() << ")\n";
     ss << "Interest: $" << interest() << "\n";
     ss << "New Purchases: $" << totalPurchases() << "\n";
     ss << "Current Balance: $" << currentBalance() << "\n";
