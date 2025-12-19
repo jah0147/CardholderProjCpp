@@ -5,6 +5,7 @@
 #include <iostream>
 #include <fstream> 
 #include <sstream>
+#include "Exceptions.hpp"
 
 // Constructor
 CardholderProcessor::CardholderProcessor() 
@@ -34,12 +35,16 @@ void CardholderProcessor::readData(std::string filenameIn)
     std::string line;
 
     if (!inputFile.is_open()) {
-        // Always check if the file actually opened!
-        return;
+        throw FileException(filenameIn); //Throws a file error
     }
+
+    int currentLine = 0; //current line counter
 
     while (std::getline(inputFile, line))
     {
+        currentLine++; //add to line counter
+        if(line.empty()) continue;
+
         std::stringstream ss(line); //reads line by line
 
         // Reads until semicolon if we were using something to section off numbers, 
@@ -67,7 +72,10 @@ void CardholderProcessor::readData(std::string filenameIn)
         //     continue; // Jump to the next line in the file
         // }
         //This is a cleaner way of writing the above if ss.fail()
-        if (!(ss >> type >> acctNum >> name >> prevBal >> payAmt)) continue; //This stops before purchases
+        if (!(ss >> type >> acctNum >> name >> prevBal >> payAmt))
+        {
+            throw DataFormatException("Invalid or missing data format", currentLine); //throws exception and gives line error occured
+        }
 
         //Using a switch statement to determin what cardholder to create
         switch (type)
@@ -76,7 +84,9 @@ void CardholderProcessor::readData(std::string filenameIn)
             case 2: ch = new DiamondCardholder(acctNum, name); break;
             case 3: ch = new BlueDiamondCardholder(acctNum, name); break;
 
-            default: std::cout << "Invalid type\n"; continue; // Skip to next line
+            default: 
+                //Throw if cardholder type is not reccognized
+                throw DataFormatException("Unknown cardholder type: " + std::to_string(type), currentLine);
         }
 
         // Transfer the values into the new object
