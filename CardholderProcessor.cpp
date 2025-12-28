@@ -5,6 +5,7 @@
 #include <iostream>
 #include <fstream> 
 #include <sstream>
+#include <algorithm>
 #include "Exceptions.hpp"
 
 // Constructor
@@ -118,5 +119,24 @@ void CardholderProcessor::generateReport()
 
         // Optional: Add a divider for better readability
         std::cout << "--------------------------" << std::endl;
+    }
+}
+
+/**
+ * \details Sorts the cardholders in descending order of their previous balance.
+ */
+void CardholderProcessor::sort()
+{
+    int n = cardholders.size();
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = i + 1; j < n; j++) {
+            // Compare the balances of the objects the pointers point to
+            if (cardholders[i]->getPrevBalance() < cardholders[j]->getPrevBalance()) {
+                // Swap the pointers (the addresses) in the vector
+                Cardholder* temp = cardholders[i];
+                cardholders[i] = cardholders[j];
+                cardholders[j] = temp;
+            }
+        }
     }
 }

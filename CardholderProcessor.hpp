@@ -16,6 +16,7 @@ class CardholderProcessor
     // Methods
     void readData(std::string filenameIn); //reads cardholder data from a file
     void generateReport(); //generates a report of all cardholders
+    void sort(); //Sort vectors by current balance from greatest to least
     
     protected:
     std::vector<Cardholder*> cardholders;
